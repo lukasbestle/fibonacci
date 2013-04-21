@@ -3,7 +3,7 @@
 # Fibonacci.js
 # Calculate Fibonacci numbers in JavaScript. Ultrafast.
 #
-# @version 1.2
+# @version 1.2.1
 # @author Lukas Bestle <http://lu-x.me>
 # @link https://github.com/vis7mac/fibonaccijs
 # @copyright Copyright 2013 Lukas Bestle
@@ -13,13 +13,15 @@
 
 
 (function() {
-  var Big, arg, bigjs, count, current2, end, i, last1, last2, output, start, time, _i, _j, _len, _ref;
+  var Big, arg, bigjs, count, current2, end, file, filename, fs, i, iStart, json, last1, last2, lastTime, output, start, time, value, _i, _j, _k, _len, _len1, _ref, _ref1;
 
   count = 1477;
 
   output = false;
 
   bigjs = false;
+
+  filename = false;
 
   if (process.argv != null) {
     _ref = process.argv;
@@ -29,6 +31,8 @@
         output = true;
       } else if (arg === '-b' && (typeof process !== "undefined" && process !== null)) {
         bigjs = true;
+      } else if (arg.match(/.*\.fibonacci/) && (typeof process !== "undefined" && process !== null)) {
+        filename = arg;
       } else if (!isNaN(arg)) {
         count = arg;
       }
@@ -40,41 +44,72 @@
     return;
   }
 
-  if (bigjs) {
-    Big = require('./big');
-    last1 = new Big('1');
-    last2 = new Big('0');
+  if (filename) {
+    bigjs = true;
+    fs = require('fs');
+    file = fs.readFileSync(fs.realpathSync(filename), {
+      'encoding': 'utf-8'
+    });
+    json = JSON.parse(file);
+    _ref1 = json.numbers.reverse();
+    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+      value = _ref1[_j];
+      if (typeof last1 === "undefined" || last1 === null) {
+        last1 = value;
+      } else {
+        last2 = value;
+        break;
+      }
+      iStart = json.generated + 1;
+      lastTime = json.time;
+    }
   } else {
     last1 = 1;
     last2 = 0;
+    iStart = 3;
+    lastTime = 0;
   }
 
-  if (output) {
-    console.log("1: " + last2);
-    console.log("2: " + last1);
+  if (bigjs) {
+    Big = require('./big');
+    last1 = new Big(last1);
+    last2 = new Big(last2);
+  }
+
+  console.log("{\n	\"numbers\": [");
+
+  if (output & lastTime === 0) {
+    console.log("		\"" + last2 + "\",");
+    console.log("		\"" + last1 + "\",");
   }
 
   start = new Date().getTime();
 
-  for (i = _j = 3; 3 <= count ? _j <= count : _j >= count; i = 3 <= count ? ++_j : --_j) {
-    current2 = last2;
-    last2 = last1;
-    if (bigjs) {
-      last1 = current2.plus(last1);
-    } else {
-      last1 = current2 + last1;
-    }
-    if (output && i < count) {
-      console.log("" + i + ": " + last1);
+  if (iStart < count) {
+    for (i = _k = iStart; iStart <= count ? _k <= count : _k >= count; i = iStart <= count ? ++_k : --_k) {
+      current2 = last2;
+      last2 = last1;
+      if (bigjs) {
+        last1 = current2.plus(last1);
+      } else {
+        last1 = current2 + last1;
+      }
+      if (output && i < count - 1) {
+        console.log("		\"" + last1 + "\",");
+      }
     }
   }
 
   end = new Date().getTime();
 
-  time = end - start;
+  time = end - start + lastTime;
 
-  console.log("" + count + ": " + last1);
+  console.log("		\"" + last2 + "\",");
 
-  console.log("\nCalculating took " + time + " milliseconds. YAY!");
+  console.log("		\"" + last1 + "\"");
+
+  console.log("	],");
+
+  console.log("	\"time\": " + time + ",\n	\"generated\": " + count + "\n}");
 
 }).call(this);
