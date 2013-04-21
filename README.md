@@ -12,19 +12,20 @@ Damn fast. Calculating 1477 Fibonacci numbers (actually the highest number JavaS
 
 ## Usage
 
-	coffee fibonacci.coffee <count>
+	coffee fibonacci.coffee <count> -o
 
 or
 
-	node fibonacci.js <count>
+	node fibonacci.js <count> -o
 
 If `count` is not given, it will calculate 1477 numbers.
+`-o` outputs all numbers but is extremely less ultrafast. ;)
 
 ### Save the Fibonacci numbers to a file
 
 Easy as pie:
 
-	node fibonacci.js > filename
+	node fibonacci.js -o > filename
 
 ### Run it in the browser
 

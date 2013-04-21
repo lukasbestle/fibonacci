@@ -3,7 +3,7 @@
  * Fibonacci.js
  * Calculate Fibonacci numbers in JavaScript. Ultrafast.
  *
- * @version 1.0
+ * @version 1.1
  * @author Lukas Bestle <http://lu-x.me>
  * @link https://github.com/vis7mac/fibonaccijs
  * @copyright Copyright 2013 Lukas Bestle
@@ -13,30 +13,47 @@
 
 
 (function() {
-  var current2, end, i, last1, last2, numbers, start, time, _i;
+  var current2, end, i, last1, last2, numbers, output, start, time, _i;
 
-  start = new Date().getTime();
+  if (process.argv[2] === '-o') {
+    numbers = process.argv[3] || 1477;
+  } else if (process.argv[2]) {
+    numbers = process.argv[2];
+  } else {
+    numbers = 1477;
+  }
+
+  if (process.argv.lastIndexOf('-o') !== -1) {
+    output = true;
+  } else {
+    output = false;
+  }
 
   last1 = 1;
 
   last2 = 0;
 
-  console.log("1: " + last2);
+  if (output) {
+    console.log("1: " + last2);
+    console.log("2: " + last1);
+  }
 
-  console.log("2: " + last1);
-
-  numbers = process.argv[2] || 1477;
+  start = new Date().getTime();
 
   for (i = _i = 3; 3 <= numbers ? _i <= numbers : _i >= numbers; i = 3 <= numbers ? ++_i : --_i) {
     current2 = last2;
     last2 = last1;
     last1 = current2 + last1;
-    console.log("" + i + ": " + last1);
+    if (output && i !== numbers) {
+      console.log("" + i + ": " + last1);
+    }
   }
 
   end = new Date().getTime();
 
   time = end - start;
+
+  console.log("" + numbers + ": " + last1);
 
   console.log("\nCalculating took " + time + " milliseconds. YAY!");
 
