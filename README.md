@@ -10,7 +10,9 @@ Programming is just !== math and works different. ;)
 
 ## How fast?
 
-Damn fast. Calculating 1477 Fibonacci numbers (actually the highest number JavaScript can fit into a "number" data type) takes around 40 milliseconds on my machine.
+Damn fast. Calculating 1477 Fibonacci numbers (actually the highest number JavaScript can fit into a "number" data type) takes around 40 milliseconds on my machine using the `-o` flag.
+
+If you omit the output and just echo the last number, it takes about 0 milliseconds. Cool, hm? :)
 
 ## Usage
 
