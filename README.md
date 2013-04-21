@@ -4,7 +4,9 @@
 
 ## Why the fuck?!
 
-After [@\_Mr\_Spike\_](http://twitter.com/_Mr_Spike_) told me it takes 3 weeks to generate the 50th Fibonacci number, I created this script to test if that's true. :)
+After [@\_Mr\_Spike\_](http://twitter.com/_Mr_Spike_) told me it takes 3 weeks to generate the 50th Fibonacci number using recursion, I created this script to check if I can do better without recursion but with iteration.
+
+Programming is just !== math and works different. ;)
 
 ## How fast?
 
