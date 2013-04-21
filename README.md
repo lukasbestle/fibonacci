@@ -14,17 +14,21 @@ Damn fast. Calculating 1477 Fibonacci numbers (actually the highest number JavaS
 
 If you omit the output and just echo the last number, it takes about 0 milliseconds. Cool, hm? :)
 
+Really big Fibonacci numbers need [Big.js](https://github.com/MikeMcl/big.js), which is less ultrafast but still quite fast.
+
 ## Usage
 
-	coffee fibonacci.coffee [<count>] [-o]
+	coffee fibonacci.coffee [<count>] [-o] [-b]
 
 or
 
-	node fibonacci.js [<count>] [-o]
+	node fibonacci.js [<count>] [-o] [-b]
 
 If `count` is not given, it will calculate 1477 numbers.
 
 `-o` outputs all numbers but is extremely less ultrafast. ;)
+
+`-b` uses [Big.js](https://github.com/MikeMcl/big.js) which is less ultrafast but works with big numbers without echoing `Infinite`.
 
 ### Save the Fibonacci numbers to a file
 
@@ -36,3 +40,10 @@ Easy as pie:
 
 Of course, you can also use this in a browser.
 Simply load the JavaScript file and watch the JavaScript console. :)
+
+You can't use [Big.js](https://github.com/MikeMcl/big.js) in the browser - you are limited to 1477 Fibonacci numbers.
+
+## Credits
+
+- [@\_Mr\_Spike\_](http://twitter.com/_Mr_Spike_) for the idea
+- [Big.js](https://github.com/MikeMcl/big.js)
