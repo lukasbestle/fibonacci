@@ -16,13 +16,14 @@ If you omit the output and just echo the last number, it takes about 0 milliseco
 
 ## Usage
 
-	coffee fibonacci.coffee <count> -o
+	coffee fibonacci.coffee [<count>] [-o]
 
 or
 
-	node fibonacci.js <count> -o
+	node fibonacci.js [<count>] [-o]
 
 If `count` is not given, it will calculate 1477 numbers.
+
 `-o` outputs all numbers but is extremely less ultrafast. ;)
 
 ### Save the Fibonacci numbers to a file
