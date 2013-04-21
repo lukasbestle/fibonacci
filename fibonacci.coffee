@@ -2,7 +2,7 @@
 # Fibonacci.js
 # Calculate Fibonacci numbers in JavaScript. Ultrafast.
 #
-# @version 1.2.1
+# @version 1.2.2
 # @author Lukas Bestle <http://lu-x.me>
 # @link https://github.com/vis7mac/fibonaccijs
 # @copyright Copyright 2013 Lukas Bestle
@@ -109,6 +109,9 @@ if iStart < count
 			last1 = current2.plus(last1);
 		else
 			last1 = current2 + last1;
+		
+		if !process.stdout.isTTY && i % 1000 == 0
+			console.warn(i);
 		
 		console.log("		\"#{last1}\",") if output and i < count - 1;
 
